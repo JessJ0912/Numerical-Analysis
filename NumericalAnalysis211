@@ -1,0 +1,12 @@
+import NaiveGaussianElimination as naivegauss
+
+n = 3
+A = np.array([[2., 1., -4.],
+              [1., -1., 1.],
+              [-1., 3., -2.]])
+b = np.array([[-7.],
+              [-2.],
+              [6.]])
+x = np.empty((n,1))
+
+naivegauss.ngauss(A, b, x, n)
