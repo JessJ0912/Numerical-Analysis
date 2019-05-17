@@ -1,0 +1,12 @@
+import NaiveGaussianElimination as naivegauss
+
+n = int(input("Enter the size of your Hilbert matrix: "))
+H = np.empty((n,n))
+b = np.ones((n, 1))
+x = np.empty((n, 1))
+
+for m in range(n):
+    for p in range(n):
+        H[m][p] = 1/((m+1) + (p+1) - 1)
+
+naivegauss.ngauss(H, b, x, n)
