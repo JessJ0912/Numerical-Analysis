@@ -1,0 +1,12 @@
+import LUFactorization as LU
+
+n = 3
+A = np.array([[3., 1., 2.],
+      [6., 3., 4.],
+      [3., 1., 5.]])
+b = np.array([[0.],
+             [1],
+             [3]])
+ 
+#LU.LUfact(A, n)
+LU.LUsolve(A, b)
