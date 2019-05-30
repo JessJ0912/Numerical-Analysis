@@ -15,20 +15,8 @@ print("A = ", A)
 condition = np.linalg.cond(A, np.inf)
 print("cond(A) = ", condition)
 
-x = naivegauss.ngauss(A, b, x, n)
-print("x = ", x)
+xa = naivegauss.ngauss(A, b, xa, n)
 
-for m in range(n):
-    for p in range(n):
-        A[m][p] = 5/((m+1) + 2*(p+1) - 1)
-b = np.ones((n,1))
-
-c = np.dot(A, b)
-#print("c = ", c)
-
-xa = naivegauss.ngauss(A, c, xa, n)
-print("xa = ", xa)
-#print("A = ", A)
 for m in range(n):
     for p in range(n):
         A[p][m] = 5/((p+1) + 2*(m+1) - 1)
@@ -36,8 +24,8 @@ b = np.ones((n,1))
 
 r = b - np.dot(A, xa)
 print("r = ", r)
-#naivegauss.ngauss(A, b, x, n)
 
+#How would I compute x, the exact solution to the system? Do I need to do this manually?
 F = x - xa
 FE = np.linalg.norm(F, np.inf)
 print("Forward Error = ", FE)
