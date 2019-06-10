@@ -1,0 +1,41 @@
+
+import numpy as np
+import math
+
+n = int(input("Enter the size of your sqaure matrix: "))
+A = np.zeros((n, n))
+x = np.ones((n, 1))
+r = np.zeros((n, 1))
+
+#Create entries in A
+for m in range(n):
+    for p in range(n):
+        A[m][p] = math.sqrt(((m+1)-(p+1))**2 +n/10)
+b = np.dot(A,x)
+
+#Find the condition number for A.        
+condition = np.linalg.cond(A, np.inf)
+print("cond(A) = ", condition)
+
+#Solve for an approximate x.
+xa = np.linalg.solve(A, b)
+#Determine r.
+r = b - np.dot(A, xa)
+
+#Find the infinity norms of the various matrices/vectors.
+rnorm = np.linalg.norm(r, np.inf)
+bnorm = np.linalg.norm(b, np.inf)
+xnorm = np.linalg.norm(x, np.inf)
+
+#Forward Error = ||x - xa||
+FE = np.linalg.norm((x-xa), np.inf)
+print("Forward Error = ", FE)
+RFE = FE/xnorm
+print("Relative Forward Error = ", RFE)
+#Relative Backward Error = ||r||/||b||
+RBE = rnorm/bnorm
+print("Relative Backward Error = ", RBE)
+
+#Error Magnification Factor = Relative Forward Error/Relative Backward Error
+EM = (RFE/RBE)
+print("Error Magnification Factor = ", EM)
