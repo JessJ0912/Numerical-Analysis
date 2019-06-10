@@ -1,0 +1,11 @@
+import NaiveGaussianElimination as ngauss
+
+A = np.array([[1., 2.], [10.**-20, 1.]])
+b = np.array([[4.], [1.]])
+n = 2
+
+x = ngauss.ngauss(A, b, n)
+print("x = ", x)
+
+#for version 2 of example 2.13, the solution is as predicte: [0, 1]
+#for version 3 of example 2.13, the solution is as predicted: [2, 1]
