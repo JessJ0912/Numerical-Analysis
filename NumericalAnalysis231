@@ -2,38 +2,35 @@ import numpy as np
 
 n = int(input("Enter the size of your sqaure matrix: "))
 A = np.zeros((n, n))
-b = np.ones((n, 1))
+x = np.ones((n, 1))
 r = np.zeros((n, 1))
 
 #Create entries in A
 for m in range(n):
     for p in range(n):
         A[m][p] = 5/((m+1) + 2*(p+1) - 1)
-
+        
+b = np.dot(A, x)
 print("A = ", A)
 
 #Find the condition number for A.        
 condition = np.linalg.cond(A, np.inf)
 print("cond(A) = ", condition)
 
-#Solve for an approximate x.
-xa = np.linalg.solve(A, b)
-
 #Determine r.
 r = b - np.dot(A, xa)
 
-#Produce the inverse of A.
-Ainv = np.linalg.inv(A)
-
 #Find the infinity norms of the various matrices/vectors.
-Anorm = np.linalg.norm(A, np.inf)
-Ainvnorm = np.linalg.norm(Ainv, np.inf)
 rnorm = np.linalg.norm(r, np.inf)
 bnorm = np.linalg.norm(b, np.inf)
+xnorm = np.linalg.norm(x, np.inf)
 
-#Relative Forward Error = ||x - xa||/||x|| = ||A^-1||||r||||A||/||Ax||
-RFE = (Ainvnorm*rnorm*Anorm)/bnorm
+#Forward Error = ||x - xa||
+FE = np.linalg.norm((x-xa), np.inf)
+print("Forward Error = ", FE)
+RFE = FE/xnorm
 print("Relative Forward Error = ", RFE)
+
 #Relative Backward Error = ||r||/||b||
 RBE = rnorm/bnorm
 print("Relative Backward Error = ", RBE)
