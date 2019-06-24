@@ -1,0 +1,23 @@
+import Jacobi
+
+n = int(input("Enter the size of your matrix:"))
+A = np.zeros((n,n))
+b = np.ones((n, 1))
+#x = np.ones((n, 1))
+
+for i in range(n):
+    A[i][i] = 3
+    if i != 0:
+        A[i][i-1] = -1
+    if i != n-1:
+        A[i][i+1] = -1
+
+b[0] = 2
+b[n-1] = 2
+
+print("A = ", A)
+print("b = ", b)
+
+print("Condition Number: ", np.linalg.cond(A, np.inf))
+x = Jacobi2.jacobi(A, b)
+print("xa = ", x)
